@@ -3,7 +3,7 @@
 Pour réaliser ce projet, connectez les composants à la carte UCA selon le plan suivant. 
 
 ### 1. Tableau des connexions
-| Composant | Fil / Broche | Pin Carte UCA | Fonction |
+| Composant | Fil / Broche | Pin Carte UCA | fonction |
 - Rotor (Servo)  
 | | Orange | **A2** | Signal de commande |
 | | Rouge | **5V** | Alimentation (+) |
