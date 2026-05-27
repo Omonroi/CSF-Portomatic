@@ -1,0 +1,27 @@
+// --- FOCUS : LES LEDS WS2812 ---
+#include <FastLED.h>
+
+#define NUM_LEDS 21 // Nombre de LEDs sur ton ruban
+#define LED_PIN  4  // Broche de données
+
+CRGB leds[NUM_LEDS];
+
+void setup() {
+  // Initialisation du ruban avec le type de LED (WS2812)
+  FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
+  FastLED.setBrightness(32); // Puissance lumineuse (max 255)
+}
+
+void loop() {
+  // EXPLICATION COULEUR :
+  // fill_solid remplit tout le tableau 'leds' avec une couleur.
+  // FastLED.show() envoie l'ordre physique au ruban.
+  
+  fill_solid(leds, NUM_LEDS, CRGB::Red); // ROUGE = Danger / Occupé
+  FastLED.show();
+  delay(1000);
+
+  fill_solid(leds, NUM_LEDS, CRGB::Green); // VERT = Libre / Prêt
+  FastLED.show();
+  delay(1000);
+}
