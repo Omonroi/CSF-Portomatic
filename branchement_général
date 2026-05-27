@@ -17,8 +17,6 @@ Pour réaliser ce projet, connectez les composants à la carte UCA selon le plan
 | | +5V | **5V** | Alimentation (+) |
 | | GND | **GND** | Masse (-) |
 
----
-
 ###  Notes Techniques importantes
 
 ###  Alimentation du PIR via A5
