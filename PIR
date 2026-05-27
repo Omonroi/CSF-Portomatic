@@ -1,0 +1,25 @@
+// --- FOCUS : LE CAPTEUR PIR ---
+const int pinPIR_OUT = A3; // Reçoit le signal (0 ou 1)
+const int pinPIR_VCC = A5; // Sert de "pile" pour le capteur
+
+void setup() {
+  Serial.begin(115200);
+
+  // EXPLICATION ALIMENTATION :
+  // Le PIR a besoin de courant. On configure A5 comme une sortie 
+  // et on la met sur HIGH (5V) pour alimenter le capteur sans fil rouge.
+  pinMode(pinPIR_VCC, OUTPUT);
+  digitalWrite(pinPIR_VCC, HIGH); 
+
+  pinMode(pinPIR_OUT, INPUT); // A3 écoute le capteur
+}
+
+void loop() {
+  // digitalRead lit l'état du capteur
+  if (digitalRead(pinPIR_OUT) == HIGH) {
+    Serial.println("Quelqu'un est devant la porte !");
+  } else {
+    Serial.println("Zone vide.");
+  }
+  delay(200);
+}
