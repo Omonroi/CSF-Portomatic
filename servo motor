@@ -1,1 +1,83 @@
+#include <Servo.h>
+#include <FastLED.h>
+
+// --- CONFIGURATION ---
+Servo myservo;
+const int pinServo   = A2;
+const int pinPIR_OUT = A3;
+const int pinPIR_VCC = A5; // Alimentation du PIR
+const int pinLED     = 4;
+
+const int posOuvert  = 90; // Ouverture à 90 degrés
+const int posFerme   = 0;  // Position fermée
+const int tempsAttente = 5000; // 5 secondes de maintien
+
+#define NUM_LEDS    21
+#define BRIGHTNESS  32
+CRGB leds[NUM_LEDS];
+
+// --- FONCTION LED ---
+void setColor(CRGB color) {
+  fill_solid(leds, NUM_LEDS, color);
+  FastLED.show();
+}
+
+void setup() {
+  Serial.begin(115200);
+
+  // Alimentation PIR
+  pinMode(pinPIR_VCC, OUTPUT);
+  digitalWrite(pinPIR_VCC, HIGH);
+  pinMode(pinPIR_OUT, INPUT);
+
+  // Servo
+  myservo.attach(pinServo);
+  myservo.write(posFerme);
+
+  // LEDs
+  FastLED.addLeds<WS2812, pinLED, GRB>(leds, NUM_LEDS);
+  FastLED.setBrightness(BRIGHTNESS);
+ 
+  setColor(CRGB::Green); // Vert au démarrage
+  Serial.println("Systeme pret (Attente 5s apres passage)");
+}
+
+void loop() {
+  // Détection de mouvement
+  if (digitalRead(pinPIR_OUT) == HIGH) {
+    Serial.println("Mouvement detecte !");
+   
+    // 1. Passage au ROUGE
+    setColor(CRGB::Red);
+   
+    // 2. Ouverture fluide jusqu'à 90°
+    int currentPos = myservo.read();
+    for (int pos = currentPos; pos <= posOuvert; pos += 2) {
+      myservo.write(pos);
+      delay(15);
+    }
+   
+    // 3. Maintenir tant qu'il y a du mouvement (sécurité)
+    Serial.println("Porte ouverte. Passage en cours...");
+    while(digitalRead(pinPIR_OUT) == HIGH) {
+      delay(100);
+    }
+   
+    // 4. TEMPO 5 SECONDES (La personne a le temps de passer)
+    Serial.println("Fin de detection. Attente de 5 secondes...");
+    delay(tempsAttente);
+   
+    // 5. Fermeture fluide
+    Serial.println("Fermeture...");
+    for (int pos = myservo.read(); pos >= posFerme; pos -= 2) {
+      myservo.write(pos);
+      delay(15);
+    }
+   
+    // 6. Retour au VERT
+    setColor(CRGB::Green);
+  }
+
+  delay(50);
+}
 
