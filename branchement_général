@@ -4,18 +4,18 @@ Pour réaliser ce projet, connectez les composants à la carte UCA selon le plan
 
 ### 1. Tableau des connexions
 | Composant | Fil / Broche | Pin Carte UCA | Fonction |
-- **Rotor (Servo)** | 
-| | 🟠 Orange | **A2** | Signal de commande |
-| | 🔴 Rouge | **5V** | Alimentation (+) |
-| | 🟤 Marron | **GND** | Masse (-) |
-- **Capteur PIR** |
-| | ⚪ OUT | **A3** | Signal de détection |
-| | 🔴 VN / VCC | **A5** | Alimentation (via code) |
-| | ⚫ GND | **GND** | Masse (-) |
-| **Ruban LED** | 
-| | 🟢 Data In | **4** | Commande couleur |
-| | 🔴 +5V | **5V** | Alimentation (+) |
-| | ⚫ GND | **GND** | Masse (-) |
+- Rotor (Servo) | 
+| | Orange | **A2** | Signal de commande |
+| | Rouge | **5V** | Alimentation (+) |
+| | Marron | **GND** | Masse (-) |
+- Capteur PIR |
+| | OUT | **A3** | Signal de détection |
+| | VN / VCC | **A5** | Alimentation (via code) |
+| | GND | **GND** | Masse (-) |
+| Ruban LED | 
+| | Data In | **4** | Commande couleur |
+| | +5V | **5V** | Alimentation (+) |
+| | GND | **GND** | Masse (-) |
 
 ---
 
@@ -24,6 +24,6 @@ Pour réaliser ce projet, connectez les composants à la carte UCA selon le plan
 ###  Alimentation du PIR via A5
 Le capteur PIR est alimenté directement par la broche numérique **A5**. 
 Dans le code, nous configurons cette broche comme une sortie de puissance :
-```cpp
+
 pinMode(A5, OUTPUT);
 digitalWrite(A5, HIGH); // Délivre du 5V au capteur
