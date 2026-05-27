@@ -15,16 +15,15 @@ Ce projet réalise une porte automatique contrôlée par une carte **UCA (Arduin
 #  Branchements
 
 | Composant | Pin Composant | Pin Carte UCA | Servo Motor |
-| :--- | :--- | :--- |
-| **Servo** 
+- **Servo** 
 | Orange (Signal) | **A2** |
 | | Rouge (+) | **5V** |
 | | Marron (-) | **GND** |
-| **PIR** 
+- **PIR** 
 | OUT (Signal) | **A3** |
 | | VN (Alimentation) | **A5** |
 | | GND | **GND** |
-| **LEDs** | Data In | **4** |
+- **LEDs** | Data In | **4** |
 
 *Note : La broche A5 fournit le 5V pour le capteur PIR via le code.*
 
